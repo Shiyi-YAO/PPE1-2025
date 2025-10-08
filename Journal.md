@@ -16,3 +16,4 @@ Le premier cours se concentre principalement sur l'apprentissage de la compréhe
 ---
 
 ### Séance 2
+to be continued....
