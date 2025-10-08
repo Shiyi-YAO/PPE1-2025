@@ -12,3 +12,7 @@ Le premier cours se concentre principalement sur l'apprentissage de la compréhe
 #### 3. Difficulté :
 - Nous devons toujours savoir dans quel fichier nous nous trouvons pour passer à l'étape suivante(trouvez le bon chemin)
 - La compréhension et l'utilisation des commandes(Nous devons nous familiariser avec de nombreuses commandes et leurs paramètres (options), et devons ensuite souvent connecter plusieurs commandes via le symbole pipe |, ce qui nécessite une certaine réflexion logique.)
+
+——————————————————————————————————————————————————————————————————————————————
+
+### Séance 2
