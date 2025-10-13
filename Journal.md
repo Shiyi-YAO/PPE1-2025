@@ -20,4 +20,7 @@ Git et GitHub
 #### 1. Différence
 - Git est un système de gestion de versions (SGV). Il nous permet d'enregistrer chaque modification apportée à un fichier, de conserver son historique et de revenir aux versions précédentes.
 - GitHub est une plateforme en ligne basée sur Git qui nous permet de télécharger notre code local sur le cloud pour collaborer, partager et discuter avec d'autres personnes.
--> Je comprends que Git est un outil et que GitHub est une plateforme.
+- Je comprends que Git est un outil et que GitHub est une plateforme.
+#### 2. Commandes
+J'ai testé quelques-unes des commandes Git les plus courantes : git add, git commit -m "message", etc. J'ai constaté que, même si ces commandes peuvent paraître un peu complexes à mémoriser au premier abord, leur déroulement est en réalité très logique :
+« add → commit → push » est un processus standard.
