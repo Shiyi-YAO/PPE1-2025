@@ -16,4 +16,8 @@ Le premier cours se concentre principalement sur l'apprentissage de la compréhe
 ---
 
 ### Séance 2
-to be continued....
+Git et GitHub
+#### 1. Différence
+- Git est un système de gestion de versions (SGV). Il nous permet d'enregistrer chaque modification apportée à un fichier, de conserver son historique et de revenir aux versions précédentes.
+- GitHub est une plateforme en ligne basée sur Git qui nous permet de télécharger notre code local sur le cloud pour collaborer, partager et discuter avec d'autres personnes.
+-> Je comprends que Git est un outil et que GitHub est une plateforme.
