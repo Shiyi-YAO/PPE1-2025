@@ -23,7 +23,7 @@ Git et GitHub
 - Je comprends que Git est un outil et que GitHub est une plateforme.
 #### 2. Commandes
 J'ai testé quelques-unes des commandes Git les plus courantes : git add, git commit -m "message", etc. J'ai constaté que, même si ces commandes peuvent paraître un peu complexes à mémoriser au premier abord, leur déroulement est en réalité très logique :
-‘’‘bash
+```bash
 « pull → add → commit → push → tag » 
-’‘’
+```
 est un processus standard.
