@@ -21,9 +21,20 @@ Git et GitHub
 - Git est un système de gestion de versions (SGV). Il nous permet d'enregistrer chaque modification apportée à un fichier, de conserver son historique et de revenir aux versions précédentes.
 - GitHub est une plateforme en ligne basée sur Git qui nous permet de télécharger notre code local sur le cloud pour collaborer, partager et discuter avec d'autres personnes.
 - Je comprends que Git est un outil et que GitHub est une plateforme.
-#### 2. Commandes
+#### 2. Déposer mes travail sur Git
 J'ai testé quelques-unes des commandes Git les plus courantes : git add, git commit -m "message", etc. J'ai constaté que, même si ces commandes peuvent paraître un peu complexes à mémoriser au premier abord, leur déroulement est en réalité très logique :
 ```bash
 « pull → add → commit → push → tag » 
 ```
 est un processus standard.
+#### 3. Manipulation des fichiers
+Comme je l’ai mentionné dans la Séance 1, les commandes pour manipuler les fichiers sont parfois complexes et difficiles à mémoriser.
+Afin de mieux comprendre leur utilisation, j’ai créé un tableau récapitulatif qui contient :
+```bash
+les options de chaque commande,
+leurs arguments,
+et une explication en chinois pour m’aider à les retenir plus facilement.
+```
+Cette méthode m’aide non seulement à mémoriser plus efficacement, mais aussi à comparer les commandes entre elles.
+Je me rends compte qu’il existe encore beaucoup de commandes que je ne connais pas, donc le plus important pour moi est de continuer à explorer et à pratiquer.
+
