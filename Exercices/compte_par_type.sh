@@ -1,6 +1,8 @@
 #!/usr/bin/bash
 
+cd ann
+
 annee=$1
 type=$2
 
-cat ann/$annee/*.ann | grep $type | wc -l
+cat $annee/*/* | grep $type | wc -l
