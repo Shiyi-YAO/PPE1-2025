@@ -60,3 +60,35 @@ cat *.txt | grep "université" | wc -l
 ➡️ Cette commande compte le nombre de lignes contenant le mot "université" dans tous les fichiers texte du répertoire courant.
 ```
 J'ai également appris beaucoup de commandes utiles ici : grep, sort, etc. Je les ai ajoutées à ma liste de commandes comme d'habitude pour une visualisation et une mémorisation faciles.
+
+---
+
+### Séance 4
+Nous avons appris deux boucles : 
+```bash
+1. for ➡️ parcourir les éléments
+2. while ➡️ faire quelques choses tant que la condition est vrai
+👆 comme les boucles dans python
+```
+Explication du code :
+```bash
+#!/usr/bin/bash
+if [ $# -ne 1 ]
+then
+  echo "ce programme demande un argument"
+  exit
+fi
+FICHIER_URLS=$1
+OK =0
+NOK =0
+while read -r LINE;
+do
+  echo "la ligne: $LINE"
+  if [[ $LINE =∼ ^https?:// ]]
+  then
+
+
+
+
+
+
