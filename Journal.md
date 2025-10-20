@@ -72,31 +72,25 @@ Nous avons appris deux boucles :
 ```
 Explication du code :
 ```bash
-#!/usr/bin/bash
-if [ $# -ne 1 ]
-then
-  echo "ce programme demande un argument"
-  exit
-fi
-FICHIER_URLS=$1
-OK =0
-NOK =0
-while read -r LINE;
+#!/usr/bin/bash # on est dans le shell bash
+if [ $# -ne 1 ] # vérifier si on reçoit 1 argument
+then #si la condition est vrai, c-à-d on n'a pas reçu 1 argument
+  echo "ce programme demande un argument" #print cette messages pour demander un entrée d'un argument
+    exit # sort de ce boucle
+fi # pour dire à ordinateur c'est la fin de la boucle
+FICHIER_URLS=$1 #un argument nommé FICHIER_URLS
+OK =0 #initialiser compteur OK
+NOK =0 #initialiser compteur OK
+while read -r LINE; #lire ce fichier par ligne
 do
-  echo "la ligne: $LINE"
-  if [[ $LINE =∼ ^https?:// ]]
-  then
-    echo "ressemble à une URL valide"
-    OK=$(expr $OK + 1)
-  else
-    echo "ne ressemble pas à une URL valide"
-    NOK=$(expr $NOK + 1)
-  fi
-done < $FICHIER_URLS
-echo "$OK URLs et $NOK lignes douteuses"
-
-
-
-
-
-
+  echo "la ligne: $LINE" #print ce qu'on a lit de cette ligne
+  if [[ $LINE =∼ ^https?:// ]] #vérifier si cette ligne est commencé par http:// ou https://
+  then #si oui 
+    echo "ressemble à une URL valide" #print la message pour dire que le contenu de cette ligne ressemble à une URL valide
+    OK=$(expr $OK + 1) #compteur des URL valide plus 1
+  else #sinon
+    echo "ne ressemble pas à une URL valide" ##print la message pour dire que le contenu de cette ligne ne ressemble pas à une URL valide
+    NOK=$(expr $NOK + 1) #compteur des URL non valide plus 1
+  fi #la fin du boucle
+done < $FICHIER_URLS #le contenu du fichier est redirigé vers la boucle while
+echo "$OK URLs et $NOK lignes douteuses" #print notre résultat du nombre des URL valide et non valide
