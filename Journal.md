@@ -86,6 +86,14 @@ do
   echo "la ligne: $LINE"
   if [[ $LINE =∼ ^https?:// ]]
   then
+    echo "ressemble à une URL valide"
+    OK=$(expr $OK + 1)
+  else
+    echo "ne ressemble pas à une URL valide"
+    NOK=$(expr $NOK + 1)
+  fi
+done < $FICHIER_URLS
+echo "$OK URLs et $NOK lignes douteuses"
 
 
 
