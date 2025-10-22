@@ -94,6 +94,7 @@ do
   fi #la fin du boucle
 done < $FICHIER_URLS #le contenu du fichier est redirigé vers la boucle while
 echo "$OK URLs et $NOK lignes douteuses" #print notre résultat du nombre des URL valide et non valide
+```
 
 ---
 
