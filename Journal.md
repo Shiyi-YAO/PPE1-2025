@@ -174,3 +174,14 @@ do
 done < "$ficher_URLS";
 ```
 这样运行出来的结果就是我们想要的结果
+
+接下来的部分我觉得难很多, 这个部分我有使用ChatGPT, 向它询问我的code哪里有错以及关于curl的一些option  
+第二个部分我们首先需要在前面的基础上在地上列显示每一个链接的http的code, 也就是我们上课的时候看到的1XX, 200等, 这个部分由于上课讲过, 所以我觉得还是比较简单, 我首先使用curl -I来提取链接的métadonnés, 我观察到我们需要的code在这个部分:
+```bash
+HTTP/2 200
+```
+那也就是说, 我只需要使用grep来找到HTTP字样, 并且提取第二列的code数字就好了, 我使用以下的code来实现我的想法:
+```bash
+code_http=$(curl -I -s $line | grep HTTP | cut -d ' ' -f2)
+# 我设置code_http这个变量来储存每一个http code, 这里的-s是为了显示的metadonne更清晰, cut用来只提取我想要的部分, 我使用-d ‘ ’来用空格将HTTP这一行分割并使用-f2来只提取第二列内容
+```
