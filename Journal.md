@@ -115,4 +115,62 @@ Question 1 : Pourquoi ne pas utiliser cat ?
 对于miniprojet的第一个问题, 我其实就不太懂它被提出来的意义, 我就很浅显的说了我对于cat和while的看法, 一个只能读取而另一个可以帮助我们处理读取到的内容, 难道说我们可以同时使用cat和read吗? 但我觉得没有必要, 因为在while中, read已经能够帮我们读取文件了, 希望假期回来之后和老师一起修改作业的时候能够回答我的疑问.
 
 Question 2 : Comment transformer "urls/fr.txt" en paramètre du script ?  
-wwndj
+这个问题还是比较好解决的, 我们将这个文件路径设置为一个参数, 这样在运行我们的sh文件时, 就必须采用输入的文件路径来运行我们的boucle
+```bash
+ficher_URLS=$1 #这里的意思就是将注入的第一个参数赋值给变量ficher_URLS
+while read -r line;
+do
+    nb=nb+1
+	echo "$nb   ${line}";
+done < "$ficher_URLS"; #相应的, 这里输入while的文件内容也要使用我们的变量
+```
+2.1 Valider l’argument : ajouter le code nécessaire pour s’assurer qu’on donne bien un argument au script, sinon on s’arrête  
+在这里, 我加入了两个if的condition, 一个用来检查输入参数数量, 一个用来检查输入参数是否为一个ficher, 如果不是的话会给予输入者一些提示信息
+```bash
+ficher_URLS=$1
+
+if [ $# -ne 1 ]
+then
+    echo "ce programme demande un argument"
+    exit
+fi
+
+if [ ! -f "$ficher_URLS" ]
+then
+    echo "vous devez indiquer un ficher"
+    exit
+fi
+
+while read -r line;
+do
+	echo "$nb   ${line}";
+done < "$ficher_URLS";
+```
+⚠️需要注意的是, 如果我们的参数赋值在路径检查的condition后面的话, 我们的if条件里面的参数名就不能用$ficher_URLS, 因为这个时候我们还没有定义参数  
+
+3. Comment afficher le numéro de ligne avant chaque URL (sur la même ligne) ?
+   - Bien séparer les valeurs par des tabulations
+对于这问题, 我们可以加入一个counter nb来帮助我们计数, 从第一个URL一直数到最后一个URLS, 并且把每次数的nb数字放在显示的URL前面, 我最开始是这样写的:
+```bash
+nb=0
+while read -r line;
+do
+    nb=nb+1
+	echo "$nb   ${line}";
+done < "$ficher_URLS";
+```
+但我发现它运行出来的每一个URL前面不是我想要的数字, 而是"nb+1", 那么一定是我的nb的赋值出了问题, 然后我重新阅读了上一节课的课件, 发现如果要给之前定义过的某一个变量进行数学运算的话应该是这样写的:
+```bash
+OK =0
+OK=$(expr $OK + 1)
+```
+以下为修改后的代码:
+```bash
+nb=0
+while read -r line;
+do
+    nb=$(expr $nb + 1)
+	echo "$nb   ${line}";
+done < "$ficher_URLS";
+```
+这样运行出来的结果就是我们想要的结果
