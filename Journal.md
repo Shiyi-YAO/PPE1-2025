@@ -101,6 +101,7 @@ echo "$OK URLs et $NOK lignes douteuses" #print notre résultat du nombre des UR
 ### Séance 5
 
 写作业时的心得以及遇到的问题
+
 Code à élaborer :
 ```bash
 while read -r line;
@@ -111,5 +112,6 @@ done < "$ficher_URLS";
 ```
 
 Question 1 : Pourquoi ne pas utiliser cat ?
+
 对于miniprojet的第一个问题, 我其实就不太懂它被提出来的意义, 我就很浅显的说了我对于cat和while的看法, 一个只能读取而另一个可以帮助我们处理读取到的内容, 难道说我们可以同时使用cat和read吗? 但我觉得没有必要, 因为在while中, read已经能够帮我们读取文件了, 希望假期回来之后和老师一起修改作业的时候能够回答我的疑问.
 
