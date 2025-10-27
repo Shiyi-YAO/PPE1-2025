@@ -185,3 +185,47 @@ HTTP/2 200
 code_http=$(curl -I -s $line | grep HTTP | cut -d ' ' -f2)
 # 我设置code_http这个变量来储存每一个http code, 这里的-s是为了显示的metadonne更清晰, cut用来只提取我想要的部分, 我使用-d ‘ ’来用空格将HTTP这一行分割并使用-f2来只提取第二列内容
 ```
+然后接下来的两个部分提取encodage, 和网页词数都和前面的方法大同小异, 并且加入两个echo, 将我的输出结果转化为表格, 以下为我的所有代码:
+```bash
+ficher_URLS=$1
+
+if [ $# -ne 1 ]
+then
+    echo "ce programme demande un argument"
+    exit
+fi
+
+if [ ! -f "$ficher_URLS" ]
+then
+    echo "vous devez indiquer un ficher"
+    exit
+fi
+
+echo -e "nb\tline\tcode_http\tencodage\tnb_mot" > tableaux/tableau-fr.tsv
+
+nb=0
+code_http=""
+encodage=""
+nb_mot=""
+while read -r line;
+do
+    nb=$(expr $nb + 1)
+    code_http=$(curl -I -s "$line" | grep HTTP | cut -d ' ' -f2 )
+    #code_http=$(curl -s -o /dev/null -w "%{http_code}" https://www.google.com)
+    encodage=$(curl -I -s "$line" | grep charset | cut -d '=' -f2 )
+    nb_mot=$( curl -s "$line" | wc -w )
+
+    if [ "$code_http" != "200" ]
+    then
+        code_http="Not_Found"
+    fi
+
+    if [ ! "$encodage" ]
+    then
+        encodage="No_encodage"
+    fi
+
+
+	echo -e "${nb}\t${line}\t${code_http}\t${encodage}\t${nb_mot}" >> tableaux/tableau-fr.tsv
+done < "$ficher_URLS";
+```
