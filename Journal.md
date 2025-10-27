@@ -100,7 +100,7 @@ echo "$OK URLs et $NOK lignes douteuses" #print notre résultat du nombre des UR
 
 ### Séance 5
 
-写作业时的心得以及遇到的问题
+Réflexions et problèmes rencontrés en faisant les devoirs
 
 Code à élaborer :
 ```bash
@@ -112,20 +112,20 @@ done < "$ficher_URLS";
 ```
 
 Question 1 : Pourquoi ne pas utiliser cat ?  
-对于miniprojet的第一个问题, 我其实就不太懂它被提出来的意义, 我就很浅显的说了我对于cat和while的看法, 一个只能读取而另一个可以帮助我们处理读取到的内容, 难道说我们可以同时使用cat和read吗? 但我觉得没有必要, 因为在while中, read已经能够帮我们读取文件了, 希望假期回来之后和老师一起修改作业的时候能够回答我的疑问.
+Concernant la première question concernant le miniprojet, je ne suis pas tout à fait sûr de sa signification. Je vais donc simplement expliquer mon point de vue sur cat et while : l'un ne fait que lire, tandis que l'autre gère le traitement. Cela signifie-t-il qu'on peut utiliser cat et read simultanément ? Je ne pense pas que ce soit nécessaire, car read gère déjà la lecture de fichiers dans while. J'espère que mon professeur pourra répondre à ma question lors de la révision de nos devoirs après les vacances.
 
 Question 2 : Comment transformer "urls/fr.txt" en paramètre du script ?  
-这个问题还是比较好解决的, 我们将这个文件路径设置为一个参数, 这样在运行我们的sh文件时, 就必须采用输入的文件路径来运行我们的boucle
+Ce problème est relativement simple à résoudre. Nous définissons le chemin d'accès au fichier comme paramètre, de sorte que lors de l'exécution de notre fichier sh, nous devons utiliser le chemin d'accès du fichier d'entrée pour exécuter notre boucle.
 ```bash
-ficher_URLS=$1 #这里的意思就是将注入的第一个参数赋值给变量ficher_URLS
+ficher_URLS=$1 #Cela signifie qu'il faut attribuer le premier paramètre injecté à la variable ficher_URLS
 while read -r line;
 do
     nb=nb+1
 	echo "$nb   ${line}";
-done < "$ficher_URLS"; #相应的, 这里输入while的文件内容也要使用我们的变量
+done < "$ficher_URLS"; #En conséquence, le contenu du fichier saisi ici utilise également nos variables
 ```
 2.1 Valider l’argument : ajouter le code nécessaire pour s’assurer qu’on donne bien un argument au script, sinon on s’arrête  
-在这里, 我加入了两个if的condition, 一个用来检查输入参数数量, 一个用来检查输入参数是否为一个ficher, 如果不是的话会给予输入者一些提示信息
+Ici, j'ai ajouté deux conditions : l'une pour vérifier le nombre de paramètres d'entrée, et l'autre pour vérifier si le paramètre d'entrée est un Fisher. Dans le cas contraire, des informations seront fournies à l'utilisateur.
 ```bash
 ficher_URLS=$1
 
@@ -146,11 +146,11 @@ do
 	echo "$nb   ${line}";
 done < "$ficher_URLS";
 ```
-⚠️需要注意的是, 如果我们的参数赋值在路径检查的condition后面的话, 我们的if条件里面的参数名就不能用$ficher_URLS, 因为这个时候我们还没有定义参数  
+⚠️Il convient de noter que si notre affectation de paramètres est effectuée après la condition de vérification du chemin, le nom du paramètre dans notre condition if ne peut pas utiliser $ficher_URLS, car nous n'avons pas défini le paramètre à ce moment.  
 
 3. Comment afficher le numéro de ligne avant chaque URL (sur la même ligne) ?
    - Bien séparer les valeurs par des tabulations
-对于这问题, 我们可以加入一个counter nb来帮助我们计数, 从第一个URL一直数到最后一个URLS, 并且把每次数的nb数字放在显示的URL前面, 我最开始是这样写的:
+Pour résoudre ce problème, nous pouvons ajouter un compteur nb pour faciliter le comptage, en comptant de la première à la dernière URL, et en plaçant le nombre nb compté à chaque fois devant l'URL affichée. Je l'ai initialement écrit ainsi :
 ```bash
 nb=0
 while read -r line;
@@ -159,12 +159,12 @@ do
 	echo "$nb   ${line}";
 done < "$ficher_URLS";
 ```
-但我发现它运行出来的每一个URL前面不是我想要的数字, 而是"nb+1", 那么一定是我的nb的赋值出了问题, 然后我重新阅读了上一节课的课件, 发现如果要给之前定义过的某一个变量进行数学运算的话应该是这样写的:
+Mais j'ai constaté que chaque URL exécutée était précédée de « nb+1 » au lieu du numéro attendu. Il devait donc y avoir une erreur dans mon affectation de nb. J'ai ensuite relu le didacticiel de la leçon précédente et constaté que pour effectuer une opération mathématique sur une variable définie précédemment, je devais l'écrire ainsi :
 ```bash
 OK =0
 OK=$(expr $OK + 1)
 ```
-以下为修改后的代码:
+Voici le code modifié :
 ```bash
 nb=0
 while read -r line;
@@ -173,51 +173,54 @@ do
 	echo "$nb   ${line}";
 done < "$ficher_URLS";
 ```
-这样运行出来的结果就是我们想要的结果
+Le résultat de cette exécution correspond à ce que nous recherchons.
 
-接下来的部分我觉得难很多, 这个部分我有使用ChatGPT, 向它询问我的code哪里有错以及关于curl的一些option  
-第二个部分我们首先需要在前面的基础上在地上列显示每一个链接的http的code, 也就是我们上课的时候看到的1XX, 200等, 这个部分由于上课讲过, 所以我觉得还是比较简单, 我首先使用curl -I来提取链接的métadonnés, 我观察到我们需要的code在这个部分:
+La partie suivante était beaucoup plus complexe. J'ai utilisé ChatGPT pour l'interroger sur les erreurs de mon code et sur certaines options curl. Pour la deuxième partie, nous devions d'abord afficher le code HTTP de chaque lien, comme pour les 1XX, 200, etc. vus en cours. Comme j'avais déjà abordé ce sujet en cours, j'ai trouvé cela relativement simple. J'ai d'abord utilisé curl -I pour extraire les métadonnées du lien. J'ai observé le code dont nous avions besoin dans cette section :
 ```bash
 HTTP/2 200
 ```
-那也就是说, 我只需要使用grep来找到HTTP字样, 并且提取第二列的code数字就好了, 我使用以下的code来实现我的想法:
+Autrement dit, il me suffit d'utiliser grep pour trouver le mot HTTP et extraire le numéro de code de la deuxième colonne. J'utilise le code suivant pour implémenter mon idée :
 ```bash
 code_http=$(curl -I -s $line | grep HTTP | cut -d ' ' -f2)
-# 我设置code_http这个变量来储存每一个http code, 这里的-s是为了显示的metadonne更清晰, cut用来只提取我想要的部分, 我使用-d ‘ ’来用空格将HTTP这一行分割并使用-f2来只提取第二列内容
+# J'ai défini la variable code_http pour stocker chaque code http. L'option « -s » permet de mieux visualiser les métadonnées, et « cut » permet d'extraire uniquement la partie souhaitée. J'utilise « -d » pour séparer la ligne HTTP par un espace et « -f2 » pour extraire uniquement la deuxième colonne.
 ```
-然后接下来的两个部分提取encodage, 和网页词数都和前面的方法大同小异, 并且加入两个echo, 将我的输出结果转化为表格, 以下为我的所有代码:
+Les deux étapes suivantes pour extraire l'encodage et le nombre de mots d'une page web sont similaires à la méthode précédente. J'ajoute également deux opérations d'écho pour convertir mon résultat en tableau. Voici l'intégralité de mon code :
 ```bash
 ficher_URLS=$1
+#    2.1 Valider l’argument : ajouter le code nécessaire pour s’assurer qu’on donne bien un argument au script, sinon on s’arrête
 
+# vérifier si on a bien argument
 if [ $# -ne 1 ]
 then
     echo "ce programme demande un argument"
     exit
 fi
 
+# vérifier l'argument est bien un ficher
 if [ ! -f "$ficher_URLS" ]
 then
     echo "vous devez indiquer un ficher"
     exit
 fi
 
-echo -e "nb\tline\tcode_http\tencodage\tnb_mot" > tableaux/tableau-fr.tsv
+echo -e "nb\tline\tcode_http\tencodage\tnb_mot" > tableaux/tableau.tsv
 
 nb=0
+meta=""
 code_http=""
 encodage=""
 nb_mot=""
 while read -r line;
 do
     nb=$(expr $nb + 1)
-    code_http=$(curl -I -s "$line" | grep HTTP | cut -d ' ' -f2 )
-    #code_http=$(curl -s -o /dev/null -w "%{http_code}" https://www.google.com)
-    encodage=$(curl -I -s "$line" | grep charset | cut -d '=' -f2 )
-    nb_mot=$( curl -s "$line" | wc -w )
+    metadonnee=$(curl -I -s -L "$line")
+    code_http=$( echo "${metadonnee}" | grep HTTP | cut -d ' ' -f2)
+    encodage=$( echo "${metadonnee}" | grep charset | cut -d '=' -f2 | tr -d '\r')
+    nb_mot=$( curl -s -L "$line" | wc -w )
 
     if [ "$code_http" != "200" ]
     then
-        code_http="Not_Found"
+        code_http="Page_Not_Found"
     fi
 
     if [ ! "$encodage" ]
@@ -226,6 +229,65 @@ do
     fi
 
 
-	echo -e "${nb}\t${line}\t${code_http}\t${encodage}\t${nb_mot}" >> tableaux/tableau-fr.tsv
+	echo -e "${nb}\t${line}\t${code_http}\t${encodage}\t${nb_mot}" >> tableaux/tableau.tsv
+
+done < "$ficher_URLS";
+```
+ ❓❓❓J'ai ensuite découvert un problème : 
+ 
+ Il y a un phénomène très étrange dans ce code. Si j'exécute metadonnee=$(curl -I -s -L "$line"), le résultat de nb_mot=$(curl -s -L "$line" | wc -w) est erroné, et vice-versa.
+ 
+C'est-à-dire je ne pouvais pas utiliser curl plusieurs fois, sinon les résultats renvoyés ne correspondaient pas aux résultats réels. J'ai demandé à chatGPT, et on m'a expliqué que c'était dû au fait que j'exécutais curl plusieurs fois sur la même URL et que la réponse du site web n'était pas corrigée, ce qui entraînait des résultats incorrects. (Ce n'est peut-être pas le problème, car la première fois que j'ai utilisé ce code, il a renvoyé les bons résultats, mais pour une raison inconnue, il a cessé de fonctionner par la suite.)
+ 
+所以我现在的任务是, 找到只使用一次curl来达到我可以提取三种信息(code, encodage, nombre de mot)的方法, 我之前为了返回的数据不要太过庞大, 使用的是curl -I, 这只会返回这个网页的metadonne, 我现在尝试使用curl -i, 来同时返回这个网页的head和body, 这样我就可以只使用一次curl, 然后从中提取我想要的信息  
+以下是修改后的code, 这样运行出来的代码是正确的:
+```bash
+ficher_URLS=$1
+
+if [ $# -ne 1 ]
+then
+    echo "ce programme demande un argument"
+    exit
+fi
+
+if [ ! -f "$ficher_URLS" ]
+then
+    echo "vous devez indiquer un ficher"
+    exit
+fi
+
+echo -e "nb\tline\tcode_http\tencodage\tnb_mot" > tableaux/tableau_fr.tsv
+
+nb=0
+meta=""
+code_http=""
+encodage=""
+nb_mot=""
+while read -r line;
+do
+    nb=$(expr $nb + 1)
+    reponse=$(curl -s -i "$line")
+    code_http=$(echo "$reponse" | head -n 1 | cut -d ' ' -f2) # la deuxième colonne de la première ligne
+    encodage=$(echo "$reponse" | grep content-type | sed -nE 's/.*charset=([^; ]*).*/\1/p' | tr -d '\r')
+	# J'ai observé le contenu renvoyé par curl -i -s, qui contenait plusieurs jeux de caractères, j'ai donc recherché directement content-type.
+	# sed -nE 's/.*charset=([^; ]*).*/\1/p' : Utilisez l'expression régulière sed pour extraire le nom d'encodage après charset=
+	# Supprimez les éventuels caractères de retour chariot \r pour garantir une sortie propre
+    nb_mot=$(echo "$reponse" | sed '1,/^\r$/d' | wc -w)
+
+	# vérifier si on peut trouver la page
+    if [ "$code_http" != "200" ]
+    then
+        code_http="Page_Not_Found"
+    fi
+
+	# vérifier on a bien l'encodage pour cette page
+    if [ ! "$encodage" ]
+    then
+        encodage="No_encodage"
+    fi
+
+
+	echo -e "${nb}\t${line}\t${code_http}\t${encodage}\t${nb_mot}" >> tableaux/tableau_fr.tsv
+
 done < "$ficher_URLS";
 ```
