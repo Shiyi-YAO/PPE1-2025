@@ -60,3 +60,234 @@ cat *.txt | grep "université" | wc -l
 ➡️ Cette commande compte le nombre de lignes contenant le mot "université" dans tous les fichiers texte du répertoire courant.
 ```
 J'ai également appris beaucoup de commandes utiles ici : grep, sort, etc. Je les ai ajoutées à ma liste de commandes comme d'habitude pour une visualisation et une mémorisation faciles.
+
+---
+
+### Séance 4
+Nous avons appris deux boucles : 
+```bash
+1. for ➡️ parcourir les éléments
+2. while ➡️ faire quelques choses tant que la condition est vrai
+👆 comme les boucles dans python
+```
+Explication du code :
+```bash
+#!/usr/bin/bash # on est dans le shell bash
+if [ $# -ne 1 ] # vérifier si on reçoit 1 argument
+then #si la condition est vrai, c-à-d on n'a pas reçu 1 argument
+  echo "ce programme demande un argument" #print cette messages pour demander un entrée d'un argument
+    exit # sort de ce boucle
+fi # pour dire à ordinateur c'est la fin de la boucle
+FICHIER_URLS=$1 #un argument nommé FICHIER_URLS
+OK =0 #initialiser compteur OK
+NOK =0 #initialiser compteur OK
+while read -r LINE; #lire ce fichier par ligne
+do
+  echo "la ligne: $LINE" #print ce qu'on a lit de cette ligne
+  if [[ $LINE =∼ ^https?:// ]] #vérifier si cette ligne est commencé par http:// ou https://
+  then #si oui 
+    echo "ressemble à une URL valide" #print la message pour dire que le contenu de cette ligne ressemble à une URL valide
+    OK=$(expr $OK + 1) #compteur des URL valide plus 1
+  else #sinon
+    echo "ne ressemble pas à une URL valide" ##print la message pour dire que le contenu de cette ligne ne ressemble pas à une URL valide
+    NOK=$(expr $NOK + 1) #compteur des URL non valide plus 1
+  fi #la fin du boucle
+done < $FICHIER_URLS #le contenu du fichier est redirigé vers la boucle while
+echo "$OK URLs et $NOK lignes douteuses" #print notre résultat du nombre des URL valide et non valide
+```
+
+---
+
+### Séance 5
+
+Réflexions et problèmes rencontrés en faisant les devoirs
+
+Code à élaborer :
+```bash
+while read -r line;
+do
+    nb=nb+1
+	echo ${line};
+done < "$ficher_URLS";
+```
+
+Question 1 : Pourquoi ne pas utiliser cat ?  
+Concernant la première question concernant le miniprojet, je ne suis pas tout à fait sûr de sa signification. Je vais donc simplement expliquer mon point de vue sur cat et while : l'un ne fait que lire, tandis que l'autre gère le traitement. Cela signifie-t-il qu'on peut utiliser cat et read simultanément ? Je ne pense pas que ce soit nécessaire, car read gère déjà la lecture de fichiers dans while. J'espère que mon professeur pourra répondre à ma question lors de la révision de nos devoirs après les vacances.
+
+Question 2 : Comment transformer "urls/fr.txt" en paramètre du script ?  
+Ce problème est relativement simple à résoudre. Nous définissons le chemin d'accès au fichier comme paramètre, de sorte que lors de l'exécution de notre fichier sh, nous devons utiliser le chemin d'accès du fichier d'entrée pour exécuter notre boucle.
+```bash
+ficher_URLS=$1 #Cela signifie qu'il faut attribuer le premier paramètre injecté à la variable ficher_URLS
+while read -r line;
+do
+    nb=nb+1
+	echo "$nb   ${line}";
+done < "$ficher_URLS"; #En conséquence, le contenu du fichier saisi ici utilise également nos variables
+```
+2.1 Valider l’argument : ajouter le code nécessaire pour s’assurer qu’on donne bien un argument au script, sinon on s’arrête  
+Ici, j'ai ajouté deux conditions : l'une pour vérifier le nombre de paramètres d'entrée, et l'autre pour vérifier si le paramètre d'entrée est un Fisher. Dans le cas contraire, des informations seront fournies à l'utilisateur.
+```bash
+ficher_URLS=$1
+
+if [ $# -ne 1 ]
+then
+    echo "ce programme demande un argument"
+    exit
+fi
+
+if [ ! -f "$ficher_URLS" ]
+then
+    echo "vous devez indiquer un ficher"
+    exit
+fi
+
+while read -r line;
+do
+	echo "$nb   ${line}";
+done < "$ficher_URLS";
+```
+⚠️Il convient de noter que si notre affectation de paramètres est effectuée après la condition de vérification du chemin, le nom du paramètre dans notre condition if ne peut pas utiliser $ficher_URLS, car nous n'avons pas défini le paramètre à ce moment.  
+
+3. Comment afficher le numéro de ligne avant chaque URL (sur la même ligne) ?
+   - Bien séparer les valeurs par des tabulations
+Pour résoudre ce problème, nous pouvons ajouter un compteur nb pour faciliter le comptage, en comptant de la première à la dernière URL, et en plaçant le nombre nb compté à chaque fois devant l'URL affichée. Je l'ai initialement écrit ainsi :
+```bash
+nb=0
+while read -r line;
+do
+    nb=nb+1
+	echo "$nb   ${line}";
+done < "$ficher_URLS";
+```
+Mais j'ai constaté que chaque URL exécutée était précédée de « nb+1 » au lieu du numéro attendu. Il devait donc y avoir une erreur dans mon affectation de nb. J'ai ensuite relu le didacticiel de la leçon précédente et constaté que pour effectuer une opération mathématique sur une variable définie précédemment, je devais l'écrire ainsi :
+```bash
+OK =0
+OK=$(expr $OK + 1)
+```
+Voici le code modifié :
+```bash
+nb=0
+while read -r line;
+do
+    nb=$(expr $nb + 1)
+	echo "$nb   ${line}";
+done < "$ficher_URLS";
+```
+Le résultat de cette exécution correspond à ce que nous recherchons.
+
+La partie suivante était beaucoup plus complexe. J'ai utilisé ChatGPT pour l'interroger sur les erreurs de mon code et sur certaines options curl. Pour la deuxième partie, nous devions d'abord afficher le code HTTP de chaque lien, comme pour les 1XX, 200, etc. vus en cours. Comme j'avais déjà abordé ce sujet en cours, j'ai trouvé cela relativement simple. J'ai d'abord utilisé curl -I pour extraire les métadonnées du lien. J'ai observé le code dont nous avions besoin dans cette section :
+```bash
+HTTP/2 200
+```
+Autrement dit, il me suffit d'utiliser grep pour trouver le mot HTTP et extraire le numéro de code de la deuxième colonne. J'utilise le code suivant pour implémenter mon idée :
+```bash
+code_http=$(curl -I -s $line | grep HTTP | cut -d ' ' -f2)
+# J'ai défini la variable code_http pour stocker chaque code http. L'option « -s » permet de mieux visualiser les métadonnées, et « cut » permet d'extraire uniquement la partie souhaitée. J'utilise « -d » pour séparer la ligne HTTP par un espace et « -f2 » pour extraire uniquement la deuxième colonne.
+```
+Les deux étapes suivantes pour extraire l'encodage et le nombre de mots d'une page web sont similaires à la méthode précédente. J'ajoute également deux opérations d'écho pour convertir mon résultat en tableau. Voici l'intégralité de mon code :
+```bash
+ficher_URLS=$1
+#    2.1 Valider l’argument : ajouter le code nécessaire pour s’assurer qu’on donne bien un argument au script, sinon on s’arrête
+
+# vérifier si on a bien argument
+if [ $# -ne 1 ]
+then
+    echo "ce programme demande un argument"
+    exit
+fi
+
+# vérifier l'argument est bien un ficher
+if [ ! -f "$ficher_URLS" ]
+then
+    echo "vous devez indiquer un ficher"
+    exit
+fi
+
+echo -e "nb\tline\tcode_http\tencodage\tnb_mot" > tableaux/tableau.tsv
+
+nb=0
+meta=""
+code_http=""
+encodage=""
+nb_mot=""
+while read -r line;
+do
+    nb=$(expr $nb + 1)
+    metadonnee=$(curl -I -s -L "$line")
+    code_http=$( echo "${metadonnee}" | grep HTTP | cut -d ' ' -f2)
+    encodage=$( echo "${metadonnee}" | grep charset | cut -d '=' -f2 | tr -d '\r')
+    nb_mot=$( curl -s -L "$line" | wc -w )
+
+    if [ "$code_http" != "200" ]
+    then
+        code_http="Page_Not_Found"
+    fi
+
+    if [ ! "$encodage" ]
+    then
+        encodage="No_encodage"
+    fi
+
+
+	echo -e "${nb}\t${line}\t${code_http}\t${encodage}\t${nb_mot}" >> tableaux/tableau.tsv
+
+done < "$ficher_URLS";
+```
+ ❓❓❓J'ai ensuite découvert un problème : 
+ 
+ Il y a un phénomène très étrange dans ce code. Si j'exécute metadonnee=$(curl -I -s -L "$line"), le résultat de nb_mot=$(curl -s -L "$line" | wc -w) est erroné, et vice-versa.
+ 
+C'est-à-dire je ne pouvais pas utiliser curl plusieurs fois, sinon les résultats renvoyés ne correspondaient pas aux résultats réels. J'ai demandé à chatGPT, et on m'a expliqué que c'était dû au fait que j'exécutais curl plusieurs fois sur la même URL et que la réponse du site web n'était pas corrigée, ce qui entraînait des résultats incorrects. (Ce n'est peut-être pas le problème, car la première fois que j'ai utilisé ce code, il a renvoyé les bons résultats, mais pour une raison inconnue, il a cessé de fonctionner par la suite.)
+ 
+所以我现在的任务是, 找到只使用一次curl来达到我可以提取三种信息(code, encodage, nombre de mot)的方法, 我之前为了返回的数据不要太过庞大, 使用的是curl -I, 这只会返回这个网页的metadonne, 我现在尝试使用curl -i, 来同时返回这个网页的head和body, 这样我就可以只使用一次curl, 然后从中提取我想要的信息  
+以下是修改后的code, 这样运行出来的代码是正确的:
+```bash
+ficher_URLS=$1
+
+if [ $# -ne 1 ]
+then
+    echo "ce programme demande un argument"
+    exit
+fi
+
+if [ ! -f "$ficher_URLS" ]
+then
+    echo "vous devez indiquer un ficher"
+    exit
+fi
+
+echo -e "nb\tline\tcode_http\tencodage\tnb_mot" > tableaux/tableau_fr.tsv
+
+nb=0
+meta=""
+code_http=""
+encodage=""
+nb_mot=""
+while read -r line;
+do
+    nb=$(expr $nb + 1)
+    reponse=$(curl -s -i "$line")
+    code_http=$(echo "$reponse" | head -n 1 | cut -d ' ' -f2) # la deuxième colonne de la première ligne
+    encodage=$(echo "$reponse" | grep content-type | sed -nE 's/.*charset=([^; ]*).*/\1/p' | tr -d '\r')
+	# J'ai observé le contenu renvoyé par curl -i -s, qui contenait plusieurs jeux de caractères, j'ai donc recherché directement content-type.
+	# sed -nE 's/.*charset=([^; ]*).*/\1/p' : Utilisez l'expression régulière sed pour extraire le nom d'encodage après charset=
+	# Supprimez les éventuels caractères de retour chariot \r pour garantir une sortie propre
+    nb_mot=$(echo "$reponse" | sed '1,/^\r$/d' | wc -w)
+
+	# vérifier si on peut trouver la page
+    if [ "$code_http" != "200" ]
+    then
+        code_http="Page_Not_Found"
+    fi
+
+	# vérifier on a bien l'encodage pour cette page
+    if [ ! "$encodage" ]
+    then
+        encodage="No_encodage"
+    fi
+
+
+	echo -e "${nb}\t${line}\t${code_http}\t${encodage}\t${nb_mot}" >> tableaux/tableau_fr.tsv
+
+done < "$ficher_URLS";
+```
