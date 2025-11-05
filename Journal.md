@@ -285,6 +285,7 @@ do
     then
         encodage="No_encodage"
     fi
+done < "$ficher_URLS";
 ```
 
 ---
@@ -294,7 +295,4 @@ do
 On a appris le HTML aujourd'hui, tout comme l'arbre syntaxe d'une phrase, la structure de HTML a aussi une hérarchie:
 ```bash
 ![image]()
-```
-
-done < "$ficher_URLS";
 ```
