@@ -286,8 +286,14 @@ do
         encodage="No_encodage"
     fi
 
+---
 
-	echo -e "${nb}\t${line}\t${code_http}\t${encodage}\t${nb_mot}" >> tableaux/tableau_fr.tsv
+### Séance 6
+
+On a appris le HTML aujourd'hui, tout comme l'arbre syntaxe d'une phrase, la structure de HTML a aussi une hérarchie:
+```bash
+![image]()
+```
 
 done < "$ficher_URLS";
 ```
