@@ -4,6 +4,7 @@ lien vers ->
 https://github.com/Shiyi-YAO/PPE1-2025/releases/tag/miniprojet-1
 
 2. miniprojet1 corrigé
+https://github.com/Shiyi-YAO/PPE1-2025/releases/tag/miniprojet-1-revu
 
 3. miniprojet2
 https://github.com/Shiyi-YAO/PPE1-2025/releases/tag/miniprojet-2
