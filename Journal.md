@@ -290,9 +290,27 @@ done < "$ficher_URLS";
 
 ---
 
-### Séance 6
+### Séance 6  
 
-On a appris le HTML aujourd'hui, tout comme l'arbre syntaxe d'une phrase, la structure de HTML a aussi une hérarchie:
+Pendant cette séance, nous avons d'abord corriger ensemble le miniprojet, j'ai beaucoup mieux compris les opérations que l'on peut faire avec curl, et je me suis rendu compte que la solution que j'ai utilisé est trop compliqué, pour récupérer les métadonnés de la page, on n'a pas besoin de prendre tous les contenus de la page avec en utilisant -i, on peut simplement utilisé : curl -I -s -L "https://example.com" pour récupérer le code_http et l'encodage, avec cette façon, j'en ai plus besoin de l'expression régulière pour éviter les problèmes de format, ce qui rend mes codes moins compliqué et plus claire.  
+
+J'ai aussi appris que dans le terminal, on peut aussi créer des paramètres ou stocker des données dans un fichier temporaire : .tmp 👇
+```bash
+terminal % curl -I -L-s -w "content_typej\n%http_code}\n" -o tmp.txt https://fr.wikipedia.org› metadata.tmp
+terminal % head -1 metadata.tmp text/html; charset=UTF-8
+terminal % tail -1 metadata.tmp
+200
+terminal % content_type=$(head -1 metadata. tmp) yaoshiyi@wifi-16-1-208 ~ % echo $content_type text/html; charset=UTF-8
+terminal % echo §content_type | cut -d= -f2
+UTF-8
+terminal % echo "text/html" | cut -d= -f2
+text/html
+terminal % echo Scontent_typel grep -E -o "charset=.*"
+charset=UTF-8
+terminal % echo $content_typel grep -E -o "charset=.*" | cut -d= -£2
+UTF-8
+```
+On a appris aussi le HTML aujourd'hui, tout comme l'arbre syntaxe d'une phrase, la structure de HTML a aussi une hérarchie:
 ```bash
 <html>
     <head>...</head>
