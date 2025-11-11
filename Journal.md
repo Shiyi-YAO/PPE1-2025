@@ -294,5 +294,8 @@ done < "$ficher_URLS";
 
 On a appris le HTML aujourd'hui, tout comme l'arbre syntaxe d'une phrase, la structure de HTML a aussi une hérarchie:
 ```bash
-![image]()
+<html>
+    <head>...</head>
+    <body>...</body>
+</html>
 ```
