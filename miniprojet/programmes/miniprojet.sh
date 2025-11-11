@@ -28,16 +28,10 @@ nb=0
 while read -r line;
 do
     nb=$(expr $nb + 1)
-    data=$(curl -I -s -L $line)
-    code_http=$(echo $data | grep HTTP | cut -d ' ' -f2)
-    encodage=$(echo $data | grep charset | cut -d '=' -f2 | tr -d '\r')
+    data=$(curl -I -w "%{http_code}\n%{content_type}" -o /dev/null -s $line)
+    code_http=$(echo "$data" | head -1)
+    encodage=$(echo "$data" | tail -1 | cut -d '=' -f2 | tr -d '\r')
     nb_mot=$(lynx -dump -nolist $line | wc -w)
-
-    if [ ! "$encodage" ]
-    then
-        encodage="No_encodage"
-    fi
-
 
 	echo -e "${nb}\t${line}\t${code_http}\t${encodage}\t${nb_mot}" >> tableaux/tableau_fr.tsv
 
