@@ -1,12 +1,10 @@
 lien vers ->  
 1. miniprojet1
-```bash
+
 https://github.com/Shiyi-YAO/PPE1-2025/releases/tag/miniprojet-1
-```
+
 2. miniprojet1 corrigé
-```bash
-```
+
 3. miniprojet2
-```bash
 https://github.com/Shiyi-YAO/PPE1-2025/releases/tag/miniprojet-2
-```
+
