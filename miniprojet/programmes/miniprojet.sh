@@ -31,15 +31,10 @@ nb_mot=""
 while read -r line;
 do
     nb=$(expr $nb + 1)
-    reponse=$(curl -s -i "$line")
-    code_http=$(echo "$reponse" | head -n 1 | cut -d ' ' -f2)
-    encodage=$(echo "$reponse" | grep content-type | sed -nE 's/.*charset=([^; ]*).*/\1/p' | tr -d '\r')
-    nb_mot=$(echo "$reponse" | sed '1,/^\r$/d' | wc -w)
-
-    if [ "$code_http" != "200" ]
-    then
-        code_http="Page_Not_Found"
-    fi
+    data=$(curl -I -s -L $line)
+    code_http=$(echo $data | grep HTTP | cut -d ' ' -f2)
+    encodage=$(echo $data | grep charset | cut -d '=' -f2 | tr -d '\r')
+    nb_mot=$(lynx -dump -nolist $line | wc -w)
 
     if [ ! "$encodage" ]
     then
