@@ -24,10 +24,7 @@ fi
 echo -e "nb\tline\tcode_http\tencodage\tnb_mot" > tableaux/tableau_fr.tsv
 
 nb=0
-meta=""
-code_http=""
-encodage=""
-nb_mot=""
+
 while read -r line;
 do
     nb=$(expr $nb + 1)

@@ -1,11 +1,11 @@
 nb	line	code_http	encodage	nb_mot
-1	https://fr.wikipedia.org/wiki/Robot	200	UTF-8 age: 20156 accept-ranges: bytes x-cache: cp6015 hit, cp6011 hit/20 x-cache-status: hit-front server-timing: cache;desc	    5668
-2	https://fr.wikipedia.org/wiki/Robot_de_cuisine	200	UTF-8 age: 79020 accept-ranges: bytes x-cache: cp6016 miss, cp6011 hit/7 x-cache-status: hit-front server-timing: cache;desc	    1157
-3	fr.wikipedia.org/wiki/Robot_d%27indexation	301	UTF-8 age: 723 accept-ranges: bytes x-cache: cp6012 miss, cp6011 hit/7 x-cache-status: hit-front server-timing: cache;desc	    1756
-4	https://fr.wikipedia.org/wiki/Bot_informatique	200	UTF-8 age: 62677 accept-ranges: bytes x-cache: cp6010 hit, cp6011 hit/39 x-cache-status: hit-front server-timing: cache;desc	    2577
-5	https://fr.wikipedia.org/wiki/Atlas_(robot)	200	UTF-8 age: 3689 accept-ranges: bytes x-cache: cp6016 hit, cp6011 hit/8 x-cache-status: hit-front server-timing: cache;desc	    1163
+1	https://fr.wikipedia.org/wiki/Robot	200	UTF-8 age: 0 accept-ranges: bytes x-cache: cp6015 miss, cp6011 miss x-cache-status: miss server-timing: cache;desc	    5668
+2	https://fr.wikipedia.org/wiki/Robot_de_cuisine	200	UTF-8 age: 79678 accept-ranges: bytes x-cache: cp6016 miss, cp6011 hit/8 x-cache-status: hit-front server-timing: cache;desc	    1157
+3	fr.wikipedia.org/wiki/Robot_d%27indexation	301	UTF-8 age: 1381 accept-ranges: bytes x-cache: cp6012 miss, cp6011 hit/9 x-cache-status: hit-front server-timing: cache;desc	    1756
+4	https://fr.wikipedia.org/wiki/Bot_informatique	200	UTF-8 age: 63336 accept-ranges: bytes x-cache: cp6010 hit, cp6011 hit/40 x-cache-status: hit-front server-timing: cache;desc	    2577
+5	https://fr.wikipedia.org/wiki/Atlas_(robot)	200	UTF-8 age: 4347 accept-ranges: bytes x-cache: cp6016 hit, cp6011 hit/10 x-cache-status: hit-front server-timing: cache;desc	    1163
 6	https://roboty.magistry.fr		No_encodage	       0
-7	https://fr.wikipedia.org/wiki/Robot_(Leonard_de_Vinci)	404	UTF-8 age: 130 x-cache: cp6013 miss, cp6011 hit/5 x-cache-status: hit-front server-timing: cache;desc	     440
-8	https://fr.wiktionary.org/wiki/robot	200	UTF-8 age: 722 accept-ranges: bytes x-cache: cp6016 hit, cp6011 hit/8 x-cache-status: hit-front server-timing: cache;desc	    4791
-9	https://fr.wikipedia.org/wiki/Protocole_d%27exclusion_des_robots	200	UTF-8 age: 75 accept-ranges: bytes x-cache: cp6016 miss, cp6011 hit/1 x-cache-status: hit-front server-timing: cache;desc	    1133
-10	https://fr.wikipedia.org/wiki/Robotique	200	UTF-8 age: 12129 accept-ranges: bytes x-cache: cp6014 miss, cp6011 hit/6 x-cache-status: hit-front server-timing: cache;desc	   13011
+7	https://fr.wikipedia.org/wiki/Robot_(Leonard_de_Vinci)	404	UTF-8 age: 788 x-cache: cp6013 miss, cp6011 hit/7 x-cache-status: hit-front server-timing: cache;desc	     440
+8	https://fr.wiktionary.org/wiki/robot	200	UTF-8 age: 1380 accept-ranges: bytes x-cache: cp6016 hit, cp6011 hit/10 x-cache-status: hit-front server-timing: cache;desc	    4791
+9	https://fr.wikipedia.org/wiki/Protocole_d%27exclusion_des_robots	200	UTF-8 age: 1380 accept-ranges: bytes x-cache: cp6016 hit, cp6011 hit/7 x-cache-status: hit-front server-timing: cache;desc	    1133
+10	https://fr.wikipedia.org/wiki/Robotique	200	UTF-8 age: 12788 accept-ranges: bytes x-cache: cp6014 miss, cp6011 hit/7 x-cache-status: hit-front server-timing: cache;desc	   13011
