@@ -323,11 +323,35 @@ UTF-8
 ```
 On a appris aussi le HTML aujourd'hui, tout comme l'arbre syntaxe d'une phrase, la structure de HTML a aussi une hérarchie:
 ```bash
-<html>
+# <...> -> balise, pour chaque structure, on a une balise racine
+Il y a 3 types de balise :
+• Ouvrantes : <balise> → le début d’une zone
+• Fermantes : </balise> → la fin d’une zone
+• Autofermantes ou vides : <balise/> → position dans le document
+<html> # <...> -> balise
     <head>...</head> #head : l’entête du fichier (avec les métadonnées)
 		[...]
 		<meta charset="UTF-8" />
 		[...]
     <body>...</body> #body : le corps du fichier (avec le contenu textuel et la structure)
 </html>
+```
+Ensuite, avec la meme structure, on peut commencer à créer le tableau en HTML, pour faire ça nous avons besoins de 4 balises :   
+1. table : la balise racine du tableau
+2. tr : table row, une ligne (se place dans table)
+3. th : table header, une cellule d’entête (seulement la première ligne)
+4. td : table data, une cellule classique (toutes les lignes pas entête)
+en utilisant ces balise, la structure de tableau en HTML sera :
+```bash
+<table>
+	<tr>
+		<th>livre</th><th>taille</th>
+	</tr>
+	<tr>
+		<td>Du côté de chez Swann</td><td>1.0Mo</td>
+	</tr>
+	<tr>
+		<td>L’Assommoir</td><td>990 ko</td>
+	</tr>
+</table>
 ```
