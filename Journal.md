@@ -297,25 +297,37 @@ Pendant cette séance, nous avons d'abord corriger ensemble le miniprojet, j'ai 
 J'ai aussi appris que dans le terminal, on peut aussi créer des paramètres ou stocker des données dans un fichier temporaire : .tmp   
 Voici les commandes et réponses dans le terminal en utilisant les méthodes précédantes 👇
 ```bash
-Voici les commandes et réponses dans le terminal en utilisant les méthodes précédantes: 
+~ data=$(curl -I -w "%{http_code}\n{content_type}" -o /dev/null -s https://fr.wikipedia.org)
+~ echo $data
+301
+text/html; charset=UTF-8
+~ echo $data | cut -f1
+301
+text/html; charset=UTF-8
 ~ curl -I -L-s -w "content_typej\n%http_code}\n" -o tmp.txt https://fr.wikipedia.org› metadata.tmp
-~ head -1 metadata.tmp text/html; charset=UTF-8
+~ head -1 metadata.tmp
+text/html; charset=UTF-8
 ~ tail -1 metadata.tmp
 200
-~ content_type=$(head -1 metadata. tmp) yaoshiyi@wifi-16-1-208 ~ % echo $content_type text/html; charset=UTF-8
+~ content_type=$(head -1 metadata. tmp)
+~ echo $content_type
+text/html; charset=UTF-8
 ~ echo $content_type | cut -d= -f2
 UTF-8
 ~ echo "text/html" | cut -d= -f2
 text/html
-~ echo $content_typel grep -E -o "charset=.*"
+~ echo $content_typel | grep -E -o "charset=.*"
 charset=UTF-8
-~ echo $content_typel grep -E -o "charset=.*" | cut -d= -£2
+~ echo $content_typel | grep -E -o "charset=.*" | cut -d= -f2
 UTF-8
 ```
 On a appris aussi le HTML aujourd'hui, tout comme l'arbre syntaxe d'une phrase, la structure de HTML a aussi une hérarchie:
 ```bash
 <html>
-    <head>...</head>
-    <body>...</body>
+    <head>...</head> #head : l’entête du fichier (avec les métadonnées)
+		[...]
+		<meta charset="UTF-8" />
+		[...]
+    <body>...</body> #body : le corps du fichier (avec le contenu textuel et la structure)
 </html>
 ```
