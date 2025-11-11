@@ -303,11 +303,11 @@ Voici les commandes et réponses dans le terminal en utilisant les méthodes pr�
 ~ tail -1 metadata.tmp
 200
 ~ content_type=$(head -1 metadata. tmp) yaoshiyi@wifi-16-1-208 ~ % echo $content_type text/html; charset=UTF-8
-~ echo §content_type | cut -d= -f2
+~ echo $content_type | cut -d= -f2
 UTF-8
 ~ echo "text/html" | cut -d= -f2
 text/html
-~ echo Scontent_typel grep -E -o "charset=.*"
+~ echo $content_typel grep -E -o "charset=.*"
 charset=UTF-8
 ~ echo $content_typel grep -E -o "charset=.*" | cut -d= -£2
 UTF-8
