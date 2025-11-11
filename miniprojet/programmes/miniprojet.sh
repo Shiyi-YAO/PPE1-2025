@@ -12,7 +12,7 @@ then
     exit
 fi
 
-echo -e "nb\tline\tcode_http\tencodage\tnb_mot" > tableaux/tableau_fr.tsv
+echo -e "<table>\n\t<tr><th>nb</th><th>line</th><th>code_http</th><th>encodage</th><th>nb_mot</th>\n" > tableaux/test.html
 
 nb=0
 
@@ -21,14 +21,11 @@ do
     nb=$(expr $nb + 1)
     data=$(curl -I -w "%{http_code}\n%{content_type}" -o /dev/null -s $line)
     code_http=$(echo "$data" | head -1)
-    encodage=$(echo "$data" | grep charset | cut -d '=' -f2 | tr -d '\r')
+    encodage=$(echo "$data" | tail -1 | cut -d '=' -f2 | tr -d '\r')
     nb_mot=$(lynx -dump -nolist $line | wc -w)
 
-    if [ ! "$encodage" ]
-    then
-        encodage="No_encodage"
-    fi
+	echo -e "\t<tr><td>${nb}</td><td>${line}</td><td>${code_http}</td><td>${encodage}</td><td>${nb_mot}</td></tr>\n" >> tableaux/test.html
 
-	echo -e "${nb}\t${line}\t${code_http}\t${encodage}\t${nb_mot}" >> tableaux/tableau_fr.tsv
+echo -e "</table>"
 
 done < "$ficher_URLS";
