@@ -355,3 +355,27 @@ en utilisant ces balise, la structure de tableau en HTML sera :
 	</tr>
 </table>
 ```
+
+---
+
+### Séance 7  
+
+création de GitPage  
+des balises utiles pour la création du page
+```bash
+<a>...</a> #ajouter un lien
+<p>...</p> #ajouter des paragraphes
+```
+CSS : Cascading Style Sheets --> Qui rend notre page plus jolie  
+- trois façon 'insérer du CSS
+  	- directement dans une balise
+  	- dans l'entete d'un ficher HTML
+  	  	```bash
+  	   <html>
+  	   		<head>
+  	   		<style>
+  	   			p	{
+  	    ```
+  	- dans un fichier à part
+
+ 
