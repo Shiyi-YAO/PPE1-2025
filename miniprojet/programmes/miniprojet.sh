@@ -12,7 +12,33 @@ then
     exit
 fi
 
-echo -e "<table>\n\t<tr><th>nb</th><th>line</th><th>code_http</th><th>encodage</th><th>nb_mot</th>\n" > tableaux/tableau-fr.html
+echo -e "<html>
+  <head>
+    <link rel=\"stylesheet\" href=\"https://cdn.jsdelivr.net/npm/bulma@1.0.4/css/bulma.min.css\">
+  </head>
+  <body>
+    <section class=\"section has-background-link-dark\">
+        <div class=\"hero has-text-centered\">
+          <div class=\"hero-body\">
+            <h1 class=\"title is-1 has-text-warning\">
+              PPE_Miniprojet
+              <h2 class=\"subtitle is-5 has-text-warning-dark\">YAOSHIYI</h2>
+              <br />
+            </h1>
+          </div>
+        </div>
+        <nav class=\"tabs is-centered\">
+          <ul>
+            <li><a href=\"../../index.html\">Accueil</a></li>
+            <li><a href=\"../programmes/miniprojet.sh\">Scripts</a></li>
+            <li class=\"is-active\"><a href=\"test_tableau.html\">Tableaux</a></li>
+          </ul>
+        </nav>
+        <br />
+        <br />
+        <div class=\"columns is-centered\">
+              <table class=\"table is-bordered is-hoverable is-striped has-background-link-dark\">
+                <tr><th>Numéro</th><th>URL</th><th>Code-HTTP</th><th>Encodage</th><th>Nombre de Mot</th>" > tableaux/tableau-fr.html
 
 nb=0
 
@@ -24,11 +50,19 @@ do
     encodage=$(echo "$data" | tail -1 | cut -d '=' -f2 | tr -d '\r')
     nb_mot=$(lynx -dump -nolist $line | wc -w)
 
-	echo -e "\t<tr><td>${nb}</td><td>${line}</td><td>${code_http}</td><td>${encodage}</td><td>${nb_mot}</td></tr>\n" >> tableaux/tableau-fr.html
-
-echo -e "</table>"
+	echo -e "\t<tr><td>${nb}</td><td><a href="${line}">${line}</td><td>${code_http}</td><td>${encodage}</td><td>${nb_mot}</td></tr>\n" >> tableaux/tableau-fr.html
 
 done < "$ficher_URLS";
+
+echo -e "              </table>
+          </div>
+        </div>
+      </div>
+    </section>
+  </body>
+
+
+</html>" >> tableaux/tableau-fr.html
 
 echo -e "
 <html>
@@ -50,7 +84,7 @@ echo -e "
         <nav class=\"tabs is-centered\">
           <ul>
             <li class=\"is-active\"><a href=\"index.html\">Accueil</a></li>
-            <li><a href=\"../programmes/miniprojet.sh\">Scripts</a></li>
+            <li><a href=\"miniprojet/programmes/miniprojet.sh\">Scripts</a></li>
             <li><a href=\"miniprojet/tableaux/tableau-fr.html\">Tableaux</a></li>
           </ul>
         </nav>
