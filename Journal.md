@@ -360,7 +360,7 @@ en utilisant ces balise, la structure de tableau en HTML sera :
 
 ### Séance 7  
 
-création de GitPage  
+Création de GitPage  
 des balises utiles pour la création du page
 ```bash
 <a>...</a> #ajouter un lien
@@ -370,12 +370,19 @@ CSS : Cascading Style Sheets --> Qui rend notre page plus jolie
 - trois façon 'insérer du CSS
   	- directement dans une balise
   	- dans l'entete d'un ficher HTML
-  	  	```bash
-  	   <html>
-  	   		<head>
-  	   		<style>
-  	   			p	{
-  	    ```
   	- dans un fichier à part
+Ou le plus facile est qu'on utilise des style que Bulma a déjà crée, il faut simplement mettre le lien de Bulma dans le head :
+```bash
+<html>
+  <head>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@1.0.4/css/bulma.min.css" />
+  </head>
+</html>
+```
+Quand j'ai commencé à ajouter du style sur mer fichiers html, je le trouve vraiment compliqué (Merciiii Bulma🙏)
+Pour la suite du miniprojet comme un débudant de "styliste", j'arrive pas à mettre du style tout par moi-meme, donc j'ai utilisé comme référence le modèle fourni par l'enseignant en modifiant les couleurs etc.   
+
+Difficulté :  
+La seule chose que je trouve un peu genant est l'adresse du fichier qu'on dois mettre dans .html pour la redirection vers la nouvelle page, c'est pas difficile mais j'ai quand meme refait(plutot corriger) le script plusieurs pour ce problème (faut fait attention!) 
 
  
