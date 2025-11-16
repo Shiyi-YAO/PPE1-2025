@@ -49,9 +49,9 @@ echo -e "
         </div>
         <nav class=\"tabs is-centered\">
           <ul>
-            <li class=\"is-active\"><a href=\"test_index.html\">Accueil</a></li>
+            <li class=\"is-active\"><a href=\"index.html\">Accueil</a></li>
             <li><a href=\"../programmes/miniprojet.sh\">Scripts</a></li>
-            <li><a href=\"tableau-fr.html\">Tableaux</a></li>
+            <li><a href=\"miniprojet/tableaux/tableau-fr.html\">Tableaux</a></li>
           </ul>
         </nav>
         <div class=\"columns is-centered\">
@@ -91,4 +91,4 @@ echo -e "
         </div>
     </section>
   </body>
-</html> " > tableaux/index.html
+</html> " > ../index.html
