@@ -385,4 +385,18 @@ Pour la suite du miniprojet comme un débudant de "styliste", j'arrive pas à me
 Difficulté :  
 La seule chose que je trouve un peu genant est l'adresse du fichier qu'on dois mettre dans .html pour la redirection vers la nouvelle page, c'est pas difficile mais j'ai quand meme refait(plutot corriger) le script plusieurs pour ce problème (faut fait attention!) 
 
- 
+ ---
+
+### Séance 8
+
+---
+
+### Séance 9  
+
+我们开始学习分析文本, 我们会用到一个工具(软件)- Le Trameur(iTrameur), 他属于“文本计量学”方法（textometry），介于统计学与语言学之间, 可以用电脑自动处理大量文本，比如：
+```bash
+- 统计每个词出现多少次
+- 找出不同文本之间的语言差异
+- 分析主题、话语风格
+```
+
